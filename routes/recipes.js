@@ -3,7 +3,7 @@ const routes = express.Router();
 const recipesDb = require('./recipesHandlers');
 
 const urlRecipes = '/api/recipes';
-//const urlByUser = '/api/dishes/:id';
+const urlByRecipe = '/api/recipes/:id';
 
 routes.use(express.json());
 
@@ -17,7 +17,7 @@ routes.get(urlRecipes, (req, res) => {
     .catch(() => {
       res
         .status(500)
-        .json({ error: 'The users information could not be retrieved.' });
+        .json({ error: 'The recipes could not be retrieved.' });
     });
 });
 
@@ -42,5 +42,20 @@ routes.post(urlRecipes, (req, res) => {
       });
   }
 });
+
+//GET RECIPE BY ID
+routes.get(urlByRecipe, (req, res) => {
+    const { id } = req.params;
+    recipesDb
+    .getRecipe(id)
+    .then(data => {
+        res.status(200).json(data);
+      })
+      .catch(() => {
+        res
+          .status(500)
+          .json({ error: 'The recipe information could not be retrieved.' });
+      });
+})
 
 module.exports = routes;

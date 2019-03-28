@@ -7,7 +7,11 @@ const db = knex(knexConfig.development);
 
 function getRecipes() {
   return db('recipes')
-    .select('recipes.id', 'recipes.name as recipe_name', 'dishes.name as dish_name')
+    .select(
+      'recipes.id',
+      'recipes.name as recipe_name',
+      'dishes.name as dish_name',
+    )
     .from('recipes')
     .innerJoin('dishes', 'recipes.dish_id', 'dishes.id');
 }
@@ -16,7 +20,31 @@ function addRecipe(recipe) {
   return db('recipes').insert(recipe);
 }
 
+function getRecipe(id) {
+  return db('recipes')
+    .select('recipes.name as recipes_name', 'dishes.name as dishes_name')
+    .from('recipes')
+    .where('recipes.id', id)
+    .innerJoin('dishes', 'recipes.dish_id', 'dishes.id')
+    .then(data => {
+      return db('ingredients')
+        .where({ recipe_id: id })
+        .then(ingredients => {
+          data[0].ingredients = ingredients;
+          return data[0];
+        });
+    });
+}
+
+//GET RECIPE BY ID
+
+// - add a method called `getRecipe(id)` to your data access library that should return the recipe with the provided `id`. The recipe should include:
+//   - name of the dish.
+//   - name of the recipe.
+//   - the list of ingredients with the quantity.
+
 module.exports = {
   getRecipes,
   addRecipe,
+  getRecipe,
 };
