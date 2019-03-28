@@ -6,7 +6,10 @@ const knexConfig = require('../knexfile.js');
 const db = knex(knexConfig.development);
 
 function getRecipes() {
-  return db('recipes');
+  return db('recipes')
+    .select('recipes.id', 'recipes.name as recipe_name', 'dishes.name as dish_name')
+    .from('recipes')
+    .innerJoin('dishes', 'recipes.dish_id', 'dishes.id');
 }
 
 function addRecipe(recipe) {
@@ -14,6 +17,6 @@ function addRecipe(recipe) {
 }
 
 module.exports = {
-    getRecipes,
-    addRecipe,
-  };
+  getRecipes,
+  addRecipe,
+};
