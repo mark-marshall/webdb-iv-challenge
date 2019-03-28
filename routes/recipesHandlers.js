@@ -36,13 +36,6 @@ function getRecipe(id) {
     });
 }
 
-//GET RECIPE BY ID
-
-// - add a method called `getRecipe(id)` to your data access library that should return the recipe with the provided `id`. The recipe should include:
-//   - name of the dish.
-//   - name of the recipe.
-//   - the list of ingredients with the quantity.
-
 module.exports = {
   getRecipes,
   addRecipe,
