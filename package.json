@@ -13,10 +13,10 @@
     "migrate": "knex migrate:latest",
     "seed1": "knex seed:make 01-dishes",
     "seed2": "knex seed:make 02-recipes",
-    "seed3": "knex seed:make 02-ingredients",
+    "seed3": "knex seed:make 03-ingredients",
     "runseed1": "knex seed:run 01-dishes",
     "runseed2": "knex seed:run 02-recipes",
-    "runseed3": "knex seed:run 02-ingredients",
+    "runseed3": "knex seed:run 03-ingredients",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run"
   },
