@@ -13,6 +13,14 @@ function getDishes() {
 function getDish(id) {
   return db('dishes')
     .where({ id })
+    .then(data => {
+      return db('recipes')
+        .where({ dish_id: id })
+        .then(recipes => {
+          data[0].recipes = recipes;
+          return data[0];
+        });
+    });
 }
 
 function addDish(dish) {

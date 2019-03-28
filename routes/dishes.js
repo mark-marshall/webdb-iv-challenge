@@ -27,7 +27,7 @@ routes.get(urlByDish, (req, res) => {
   dishesDb
     .getDish(id)
     .then(dish => {
-      if (dish.length > 0) {
+      if (dish) {
         res.status(200).json(dish);
       } else {
         res.status(404).json({ message: 'no dish exist with the provided id' });
