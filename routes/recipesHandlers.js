@@ -36,8 +36,14 @@ function getRecipe(id) {
     });
 }
 
+function getShoppingList(recipeId) {
+  return db('ingredients')
+  .where({ recipe_id: recipeId })
+}
+
 module.exports = {
   getRecipes,
   addRecipe,
   getRecipe,
+  getShoppingList,
 };
