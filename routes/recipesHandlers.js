@@ -38,6 +38,8 @@ function getRecipe(id) {
 
 function getShoppingList(recipeId) {
   return db('ingredients')
+  .select('ingredients.name', 'ingredients.quantity', 'ingredients.unit')
+  .from('ingredients')
   .where({ recipe_id: recipeId })
 }
 
